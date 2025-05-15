@@ -237,6 +237,7 @@
 'use client';
 
 import {useState} from 'react';
+import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card";
 
 export default function DataForm() {
     const [formData, setFormData] = useState({
@@ -252,12 +253,12 @@ export default function DataForm() {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [message, setMessage] = useState({text: '', isError: false});
 
-    const handleChange = (e) => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const {name, value} = e.target;
         setFormData(prev => ({...prev, [name]: value}));
     };
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setIsSubmitting(true);
         setMessage({text: '', isError: false});
@@ -298,143 +299,166 @@ export default function DataForm() {
     return (
         <main className="min-h-screen bg-blue-600 p-4 md:p-8 flex flex-col">
 
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-yellow-300 text-center mb-2">
-                Действуй с командой ЛДПР!
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white text-center mb-2">
+                Действуй с командой ЛДПР Шатура!
             </h1>
-            <h2 className="text-xl md:text-2xl lg:text-3xl font-semibold text-yellow-300 text-center mb-8">
+            <h2 className="text-xl md:text-2xl lg:text-3xl font-semibold text-white text-center mb-8">
                 Халезин Сергей Николаевич
             </h2>
-            <h2 className="text-yellow-300 text-xl md:text-2xl text-center">
-                Поддержать кандидата
-            </h2>
+            <Card className="bg-blue-700">
+                <CardHeader>
+                    {/*<h2 className="text-white text-xl md:text-2xl text-center">*/}
+                    <CardTitle className="text-white text-xl md:text-xl text-center">
+                        Поддержать кандидата
+                    </CardTitle>
+                    {/*</h2>*/}
+                </CardHeader>
 
-
-            <form
-                onSubmit={handleSubmit}
-                className="space-y-4 max-w-md mx-auto bg-blue-600 p-4 md:p-8"
-                // className="min-h-screen bg-blue-600 p-4 md:p-8 flex flex-col"
-            >
-                <div className="grid grid-cols-1 gap-4">
-                    <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">
-                            Фамилия*
-                        </label>
-                        <input
-                            type="text"
-                            name="lastName"
-                            value={formData.lastName}
-                            onChange={handleChange}
-                            required
-                            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                        />
-                    </div>
-
-                    <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">
-                            Имя*
-                        </label>
-                        <input
-                            type="text"
-                            name="firstName"
-                            value={formData.firstName}
-                            onChange={handleChange}
-                            required
-                            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                        />
-                    </div>
-
-                    <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">
-                            Отчество
-                        </label>
-                        <input
-                            type="text"
-                            name="middleName"
-                            value={formData.middleName}
-                            onChange={handleChange}
-                            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                        />
-                    </div>
-
-                    <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">
-                            Дата рождения*
-                        </label>
-                        <input
-                            type="date"
-                            name="birthDate"
-                            value={formData.birthDate}
-                            onChange={handleChange}
-                            required
-                            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                        />
-                    </div>
-
-                    <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">
-                            Город
-                        </label>
-                        <input
-                            type="text"
-                            name="city"
-                            value={formData.city}
-                            onChange={handleChange}
-                            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                        />
-                    </div>
-
-                    <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">
-                            Улица и дом
-                        </label>
-                        <input
-                            type="text"
-                            name="street"
-                            value={formData.street}
-                            onChange={handleChange}
-                            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                        />
-                    </div>
-
-                    <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">
-                            Телефон*
-                        </label>
-                        <input
-                            type="tel"
-                            name="phone"
-                            value={formData.phone}
-                            onChange={handleChange}
-                            required
-                            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                            placeholder="+79161234567"
-                        />
-                    </div>
-                </div>
-
-                <div className="pt-2">
-                    <button
-                        type="submit"
-                        disabled={isSubmitting}
-                        className="w-full bg-yellow-300 text-blue-700 hover:bg-yellow-400 text-lg font-semibold py-3 px-4 rounded-md disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                <CardContent>
+                    <form
+                        onSubmit={handleSubmit}
+                        // className="space-y-4 max-w-md mx-auto bg-blue-600 p-4 md:p-8"
+                        className="max-w-md mx-auto flex-grow"
                     >
-                        {isSubmitting ? 'Отправка...' : 'Подать данные'}
-                    </button>
-                </div>
+                        <div className="grid grid-cols-1 gap-4">
+                            <div>
+                                <label className="block text-sm font-medium text-yellow-300 mb-1">
+                                    Фамилия*
+                                </label>
+                                <input
+                                    type="text"
+                                    name="lastName"
+                                    value={formData.lastName}
+                                    onChange={handleChange}
+                                    required
+                                    className="bg-white text-black border-my_color py-6 text-lg flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 ring-offset-background file:border-0 file:bg-transparent file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                                    // className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                                />
+                            </div>
 
-                {message.text && (
-                    <div
-                        className={`p-3 rounded-md ${message.isError ? 'bg-red-100 text-red-700' : 'bg-green-100 text-green-700'}`}>
-                        {message.text}
-                    </div>
-                )}
+                            <div>
+                                <label className="block text-sm font-medium text-yellow-300 mb-1">
+                                    Имя*
+                                </label>
+                                <input
+                                    type="text"
+                                    name="firstName"
+                                    value={formData.firstName}
+                                    onChange={handleChange}
+                                    required
+                                    className="bg-white text-black border-my_color py-6 text-lg flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 ring-offset-background file:border-0 file:bg-transparent file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                                    // className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                                />
+                            </div>
 
-                <div className="text-xs text-gray-500 text-center pt-2">
-                    <p>Данные будут сохранены в Яндекс.Облаке и доступны только через консоль администратора</p>
-                </div>
+                            <div>
+                                <label className="block text-sm font-medium text-yellow-300 mb-1">
+                                    Отчество
+                                </label>
+                                <input
+                                    type="text"
+                                    name="middleName"
+                                    value={formData.middleName}
+                                    onChange={handleChange}
+                                    className="bg-white text-black border-my_color py-6 text-lg flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 ring-offset-background file:border-0 file:bg-transparent file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                                    // className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                                />
+                            </div>
+
+                            <div>
+                                <label className="block text-sm font-medium text-yellow-300 mb-1">
+                                    Дата рождения*
+                                </label>
+                                <input
+                                    type="date"
+                                    name="birthDate"
+                                    value={formData.birthDate}
+                                    onChange={handleChange}
+                                    required
+                                    className="bg-white text-black border-my_color py-6 text-lg flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 ring-offset-background file:border-0 file:bg-transparent file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                                    // className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                                />
+                            </div>
+
+                            <div>
+                                <label className="block text-sm font-medium text-yellow-300 mb-1">
+                                    Город
+                                </label>
+                                <input
+                                    type="text"
+                                    name="city"
+                                    value={formData.city}
+                                    onChange={handleChange}
+                                    className="bg-white text-black border-my_color py-6 text-lg flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 ring-offset-background file:border-0 file:bg-transparent file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                                    // className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                                />
+                            </div>
+
+                            <div>
+                                <label className="block text-sm font-medium text-yellow-300 mb-1">
+                                    Улица и дом
+                                </label>
+                                <input
+                                    type="text"
+                                    name="street"
+                                    value={formData.street}
+                                    onChange={handleChange}
+                                    className="bg-white text-black border-my_color py-6 text-lg flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 ring-offset-background file:border-0 file:bg-transparent file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                                    // className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                                />
+                            </div>
+
+                            <div>
+                                <label className="block text-sm font-medium text-yellow-300 mb-1">
+                                    Телефон*
+                                </label>
+                                <input
+                                    type="tel"
+                                    name="phone"
+                                    value={formData.phone}
+                                    onChange={handleChange}
+                                    required
+                                    className="bg-white text-black border-my_color py-6 text-lg flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 ring-offset-background file:border-0 file:bg-transparent file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                                    // className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                                    placeholder="+79161234567"
+                                />
+                            </div>
+                        </div>
+
+                        <div className="pt-2">
+                            <button
+                                type="submit"
+                                disabled={isSubmitting}
+                                className="w-full bg-yellow-300 text-blue-700 hover:bg-yellow-400 text-lg font-semibold py-3 px-4 rounded-md disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                            >
+                                {isSubmitting ? 'Отправка...' : 'Подать данные'}
+                            </button>
+                        </div>
+
+                        {message.text && (
+                            <div
+                                className={`p-3 rounded-md ${message.isError ? 'bg-red-100 text-red-700' : 'bg-green-100 text-green-700'}`}>
+                                {message.text}
+                            </div>
+                        )}
+
+                        {/*<div className="text-xs text-yellow-400 text-center pt-2">*/}
+                        {/*    <p>Нажимая кнопку «Подать данные» (Согласно Федеральному закону от 27.07.2006 года № 152-ФЗ «О персональных данных»), даю согласие на обработку, а именно совершение действий, предусмотренных п.3,4 ч.1 ст. 3 Федерального закона «О персональных данных», в том числе с использованием средств автоматизации, моих персональных данных любыми не запрещенными законодательством Российской Федерации способами, в целях, определенных уставом юридического лица.</p>*/}
+                        {/*</div>*/}
 
 
-            </form>
+                    </form>
+                </CardContent>
+            </Card>
+            <footer className="mt-8 text-white text-xs text-center max-w-md mx-auto">
+                <p>
+                    Нажимая кнопку «Подать данные» (Согласно Федеральному закону от 27.07.2006 года № 152-ФЗ «О персональных
+                    данных»), даю согласие на обработку, а именно совершение действий, предусмотренных п.3,4 ч.1 ст. 3
+                    Федерального закона «О персональных данных», в том числе с использованием средств автоматизации, моих
+                    персональных данных любыми не запрещенными законодательством Российской Федерации способами, в целях,
+                    определенных уставом юридического лица.
+                </p>
+            </footer>
         </main>
     );
 }
