@@ -420,7 +420,7 @@ export default function DataForm() {
                                     required
                                     className="bg-white text-black border-my_color py-6 text-lg flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 ring-offset-background file:border-0 file:bg-transparent file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                                     // className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                                    placeholder="+79161234567"
+                                    // placeholder="+79161234567"
                                 />
                             </div>
                         </div>
@@ -439,6 +439,7 @@ export default function DataForm() {
                             <div
                                 className={`p-3 rounded-md ${message.isError ? 'bg-red-100 text-red-700' : 'bg-green-100 text-green-700'}`}>
                                 {message.text}
+                                <p onClick={() => setMessage({...message, text: ""})}>x</p>
                             </div>
                         )}
 
